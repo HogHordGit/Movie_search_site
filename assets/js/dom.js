@@ -38,7 +38,8 @@ export const createStyle = () => {
                 }
                 
                 .container {
-                    padding: 20px;
+                    width: min(100% - 40px, 1280px);
+                    margin-inline: auto;
                 }
                 
                 .movies {
@@ -64,7 +65,32 @@ export const createStyle = () => {
                 
                     -o-object-fit: cover;
                     object-fit: cover;
-                }	
+                }
+                
+                .search {
+                    margin-bottom: 30px;
+                }
+                
+                .search__label-input {
+                    display: block;
+                    margin-bottom: 7px;
+                }
+                
+                .search__input {
+                    display: block;
+                    max-width: 400px;
+                    width: 100%;
+                    padding: 10px 15px;
+                    margin-bottom: 10px;
+                    border: 1px solid lightsteelblue;
+                    border-radius: 4px;
+                }
+                
+                .search__label-checkbox {
+                    font-size: 12px;
+                    display: inline-block;
+                    transform: translate(7px, -2.5px);
+                }
             `
         },
         container: document.head
@@ -131,7 +157,7 @@ export const createMarkup = () => {
         },
         container: searchBox
     });
-    inputSearch = createElement({
+    createElement({
         type: "input",
         attrs: {
             class: "search__checkbox",
@@ -161,7 +187,7 @@ export const createMarkup = () => {
 	moviesList = document.querySelector(".movies");
 };
 
-export const addMovieTiList = (movie) => {
+export const addMovieToList = (movie) => {
 	const item = createElement({
         type: "div",
         attrs: {
