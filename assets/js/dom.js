@@ -1,11 +1,13 @@
 export let moviesList = null;
 export let inputSearch = null;
+export let triggerMode = false;
 
 const createElement = ({
     type, 
     attrs, 
     container = null, 
     position = "append", 
+    evt,
     handler
 }) => {
     const el = document.createElement(type);
@@ -17,7 +19,11 @@ const createElement = ({
     
     if (container && position === "append") container.append(el);
     if (container && position === "prepend") container.prepend(el);
-    
+
+    if (evt && handler && typeof(handler) === "function") {
+        el.addEventListener(evt, handler);
+    }
+
     return el;
 };
 
@@ -164,7 +170,9 @@ export const createMarkup = () => {
             id: "checkbox",
             type: "checkbox",
         },
-        container: checkBox
+        container: checkBox,
+        evt: "click",
+        handler: () => triggerMode = !triggerMode
     });
     createElement({
         type: "label",
@@ -207,3 +215,5 @@ export const addMovieToList = (movie) => {
         container: item
     });
 };
+
+export const clearMoviesMarkup = (el) => el && (el.innerHTML = "");

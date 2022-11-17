@@ -1,4 +1,4 @@
-import {createStyle, createMarkup, addMovieToList, inputSearch, moviesList} from "./dom.js";
+import {createStyle, createMarkup, addMovieToList, inputSearch, clearMoviesMarkup, triggerMode, moviesList} from "./dom.js";
 
 let searchLast = null;
 
@@ -24,6 +24,8 @@ const inputSearchHandler = (e) => {
         const searchString = e.target.value.trim();
 
         if (searchString && searchString.length > 3 && searchLast !== searchString) {
+            if (!triggerMode) clearMoviesMarkup(moviesList);
+
             getData(`http://www.omdbapi.com/?apikey=807ce5ba&s=${searchString}`)
             .then(movies => movies.forEach(movie => addMovieToList(movie)))
             .catch(console.log);
